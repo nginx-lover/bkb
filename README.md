@@ -64,4 +64,10 @@ So I design the universal rule [json] format which can be manipulated by almost 
 #Rule
 
 ##phase
-rule 's work phase 
+*desc*: rule 's work phase
+
+It can be consist of access、header_filter、body_filter and It's fit for nginx http phase specially.
+
+the origin modsecurity rule's phase is the following:
+![phase](https://github.com/x-v8/bkb/blob/master/docs/modsecurity.jpeg)
+
