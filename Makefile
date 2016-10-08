@@ -19,4 +19,4 @@ test:
 
 lint:
 	luacheck src/
-.PHONY: test lint
+.PHONY: test lint install clean
