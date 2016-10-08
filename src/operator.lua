@@ -1,6 +1,5 @@
 local _M = {}
 
-local inject = require ("lib.injection")
 local iputils = require("lib.resty.iputils")
 local utf8 = require("lib.utf8_validator")
 local util = require("util")
