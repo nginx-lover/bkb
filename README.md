@@ -19,7 +19,7 @@ According the cloudflare blog post in 2013 [cloudflares-new-waf-compiling-to-lua
 From the [modsecurity] rules, it can be demonstrated as the following:
 
 ````lua
-if operator(variable, pattern) then
+if operator(transform(variable), pattern) then
   action
 else
   continue
@@ -75,7 +75,50 @@ It can be consist of access、header_filter、body_filter and It's fit for nginx
 the origin modsecurity rule's phase is the following:
 ![phase](https://github.com/x-v8/bkb/blob/master/docs/modsecurity.jpeg)
 
+
 ##scope
 *desc*: rule's scope
 
-It indicate that the scope the rule's variable  
+It indicate that the scope the rule's variable.
+
+````python
+SCOPECHOICE = (
+    (0, 'ip'),
+    (1, 'uri'),
+    (2, 'header'),
+    (3, 'cookie'),
+    (4, 'arg'),
+)
+````
+
+
+##tag
+*desc*: rule 's tag
+
+It can be consist of the following:
+
+````python
+TAGCHOICE = (
+    (0, 'XSS'),
+    (1, 'SQLI'),
+    (2, 'IP Deny'),
+    (3, 'Shell Inject'),
+    (4, 'URI Scan'),
+    (5, 'PHPI'),
+    (6, 'SCANNER'),
+    (7, 'CVE')
+)
+````
+
+##operator
+*desc*: the rule's operator
+
+commonly  it will bbe the some string function to match variable. It can be consist of the following:
+````python
+OPERATOR = [
+    'eq', 'rx', 'ipMatch', 'beginsWith', 'endsWith', 'ge', 'gt', 'lt', 'le',
+    'empty', 'nonEmpty', 'within', 'pmFromFile', 'pm'
+]
+````
+
+
