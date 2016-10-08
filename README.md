@@ -142,3 +142,19 @@ VARIABLE = [
     'ip', 'uri', 'request_headers', 'request_cookies', 'args', 'matched_var'
 ]
 ````
+
+##pattern
+*desc*: the rule's pattern
+
+It always be the string you want to match like abcd
+
+
+##action
+*desc*: action
+
+It can be consist of the following:
+````python
+ACTION = [
+    'deny', 'skip'
+]
+````
