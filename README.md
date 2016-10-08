@@ -13,6 +13,7 @@ Black King Bar (also known as BKB) is an Armor item purchasable from the Home Sh
 BKB in here is the web application firewall (WAF), it's based on the [OpenResty] under the hood.
 It 's used to prevent malignant web attack from HTTP(s). And it's insired by the [modsecurity] and can be compatibled with the modsecurity rules.
 
+
 #Feature
 * Automation Detection - Detecting bots, crawlers, scanners and other surface malicious activity by modsecurity
 * Common Web Attacks Protection - XSS、SQL Inject、Shell Inject by modsecurity
@@ -20,6 +21,11 @@ It 's used to prevent malignant web attack from HTTP(s). And it's insired by the
 * Virtual patching - Fixes a vulnerability before you patch your server or update your code, allowing
 you more time to patch and test updates
 * IP Deny - blacklist/whitelist traffic from specific IP addresses with time expire 
+
+
+#Todo
+* DDos Protect
+
 
 #Principle
 According the cloudflare blog post in 2013 [cloudflares-new-waf-compiling-to-lua](https://blog.cloudflare.com/cloudflares-new-waf-compiling-to-lua/), I implement the first version which it's not so good. I carefully think that the [modsecurity] rules compiling to the lua code chunk is not perfect and the compiler which i implement is dirty:(. So i reading the [modsecurity] rules carefully, then design the second version.
