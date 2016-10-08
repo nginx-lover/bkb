@@ -61,3 +61,7 @@ So I design the universal rule [json] format which can be manipulated by almost 
   }
 ````
 
+#Rule
+
+##phase
+rule 's work phase 
