@@ -150,7 +150,7 @@ It always be the string you want to match like abcd
 
 
 ##action
-*desc*: action
+*desc*: rule's action
 
 It can be consist of the following:
 ````python
@@ -158,3 +158,8 @@ ACTION = [
     'deny', 'skip'
 ]
 ````
+
+##chain
+*desc*: rule's chain
+
+It's the pre condition for rule.
