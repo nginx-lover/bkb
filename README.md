@@ -113,7 +113,7 @@ TAGCHOICE = (
 ##operator
 *desc*: the rule's operator
 
-commonly  it will bbe the some string function to match variable. It can be consist of the following:
+commonly it will be the some string function to match variable. It can be consist of the following:
 ````python
 OPERATOR = [
     'eq', 'rx', 'ipMatch', 'beginsWith', 'endsWith', 'ge', 'gt', 'lt', 'le',
@@ -121,4 +121,24 @@ OPERATOR = [
 ]
 ````
 
+##transform
+*desc*: the rule's transform
 
+It can be consist of the following:
+````python
+TRANSFORM = [
+    'urlDecodeUni', 'jsDecode', 'lowercase', 'base64Decode', 'base64Encode',
+    'length', 'sha1', 'htmlEntityDecode', 'compressWhitespace', 'removeWhitespace',
+    'cssDecode'
+]
+````
+
+##variable
+*desc*: the rule's variable
+
+It can be consist of the following:
+````python
+VARIABLE = [
+    'ip', 'uri', 'request_headers', 'request_cookies', 'args', 'matched_var'
+]
+````
