@@ -22,6 +22,7 @@ local get_phase = ngx.get_phase
 
 local wafrule = ngx.shared.wafrule
 
+_M.dry = false
 _M.appname = 'WAF-BKB'
 _M.operator = operator
 _M.action = action

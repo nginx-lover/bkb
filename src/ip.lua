@@ -13,6 +13,8 @@ local get_headers = ngx.req.get_headers
 local waf_action_skip = waf.action.skip
 local waf_action_deny = waf.action.deny
 local waf_action_allow = waf.action.allow
+local waf_action_log = waf.action.log
+
 
 -----------------------------------
 --------------operator-------------

@@ -23,9 +23,22 @@ function _M.allow(waf, ctx, id, param)
 end
 
 
+function _M.log(waf, ctx, id, param)
+    ctx.id = id
+    ctx.enable = true
+
+    return true
+end
+
+
 function _M.deny(waf, ctx, id, param)
     ctx.id = id
     ctx.enable = true
+
+    if waf.dry == true then
+        return true
+    end
+
     ngx.status = 403
 
     if waf.html[param] ~= nil then
