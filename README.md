@@ -169,7 +169,7 @@ It always be the string you want to match like abcd
 It can be consist of the following:
 ````python
 ACTION = [
-    'deny', 'skip'
+    'deny', 'skip', 'log'
 ]
 ````
 
