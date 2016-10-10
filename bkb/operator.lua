@@ -1,11 +1,11 @@
 local _M = {}
 
-local inject = require ("lib.injection")
-local iputils = require("lib.resty.iputils")
-local utf8 = require("lib.utf8_validator")
-local util = require("util")
-local iputils = require("lib.resty.iputils")
-local ac = require("lib.ac")
+local inject = require ("bkb.lib.injection")
+local iputils = require("bkb.lib.resty.iputils")
+local utf8 = require("bkb.lib.utf8_validator")
+local util = require("bkb.util")
+local iputils = require("bkb.lib.resty.iputils")
+local ac = require("bkb.lib.ac")
 
 iputils.enable_lrucache()
 

@@ -6,10 +6,10 @@ env_to_nginx("WAF-MODE=test", "WAF-DIR=$workdir");
 
 our $http_config = <<"_EOC_";
   lua_shared_dict wafrule 10m;
-  lua_package_path '$workdir/src/?.lua;;';
-  lua_package_cpath '$workdir/src/clib/?.so;;';
+  lua_package_path '$workdir/?.lua;;';
+  lua_package_cpath '$workdir/bkb/clib/?.so;;';
   access_by_lua '
-      local waf = require "waf"
+      local waf = require "bkb.waf"
       waf.use_x_forwarded_for = true
       waf.run()
   ';

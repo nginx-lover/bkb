@@ -2,8 +2,8 @@ local _M = {}
 
 
 local match = ngx.re.match
-local resty_cookie = require("lib.resty.cookie")
-local xml = require("lib.xml")
+local resty_cookie = require("bkb.lib.resty.cookie")
+local xml = require("bkb.lib.xml")
 local xml_parse = xml.parse
 local string_sub = string.sub
 local string_lower = string.lower
@@ -11,7 +11,7 @@ local cjson = require "cjson"
 local json = require("cjson.safe")
 local json_decode = json.decode
 local cjson_decode = cjson.decode
-local upload = require("lib.resty.upload")
+local upload = require("bkb.lib.resty.upload")
 
 
 function _M.implode(t, delimiter)

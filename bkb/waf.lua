@@ -1,20 +1,20 @@
 local _M = {
-    _VERSION = '0.1.0'
+    _VERSION = "0.1.0"
 }
 
 local get_headers = ngx.req.get_headers
-local operator = require('operator')
-local action = require('action')
-local transform = require('transform')
-local config_pcre = require('config.pcre')
-local config_file = require('config.file')
-local config_html = require('config.html')
-local config_whitelistip = require('config.whitelistip')
-local iputils = require("lib.resty.iputils")
+local operator = require("bkb.operator")
+local action = require("bkb.action")
+local transform = require("bkb.transform")
+local config_pcre = require("bkb.config.pcre")
+local config_file = require("bkb.config.file")
+local config_html = require("bkb.config.html")
+local config_whitelistip = require("bkb.config.whitelistip")
+local iputils = require("bkb.lib.resty.iputils")
 local ip_in_cidrs = iputils.ip_in_cidrs
 local loadstring = loadstring
-local util = require('util')
-local time = require('lib.time')
+local util = require("bkb.util")
+local time = require("bkb.lib.time")
 local gettimeofday = time.gettimeofday
 local ngx_log = ngx.log
 local ERR = ngx.ERR
@@ -23,7 +23,7 @@ local get_phase = ngx.get_phase
 local wafrule = ngx.shared.wafrule
 
 _M.dry = false
-_M.appname = 'WAF-BKB'
+_M.appname = "WAF-BKB"
 _M.operator = operator
 _M.action = action
 _M.transform = transform
@@ -45,7 +45,7 @@ function _M.run()
     ctx.delay = 0
 
     -- update ip on the fly
-    local ip = require('ip')
+    local ip = require("bkb.ip")
     local version, flags = wafrule:get("ip.version")
     if version ~= nil then
         if version ~= ip._VERSION then
@@ -66,7 +66,7 @@ function _M.run()
     end
 
     -- update rule on the fly
-    local rule = require('rule')
+    local rule = require("bkb.rule")
     local version, flags = wafrule:get("rule.version")
     if version ~= nil then
         if version ~= rule._VERSION then
@@ -89,7 +89,7 @@ function _M.run()
     -- skip whitelistip forever
     local remote_addr = ngx.var.remote_addr;
     if _M.use_x_forwarded_for then
-        remote_addr = get_headers()['x-forwarded-for'] or ngx.var.remote_addr
+        remote_addr = get_headers()["x-forwarded-for"] or ngx.var.remote_addr
     end
 
     if ip_in_cidrs(remote_addr, _M.whitelistip) then
