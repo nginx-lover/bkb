@@ -101,13 +101,13 @@ function _M.run(waf, ctx)
     t._2 = { waf_transform_htmlEntityDecode,waf_transform_jsDecode, }
     t._3 = { waf_transform_htmlEntityDecode,waf_transform_compressWhitespace, }
     t._4 = { waf_transform_lowercase, }
-    
+
 
     if phase == "access" then
         -----------------------------------
         ----------------IP-----------------
         -----------------------------------
-        
+
         -----------------------------------
         ----------------uri----------------
         -----------------------------------
@@ -119,7 +119,7 @@ function _M.run(waf, ctx)
                 waf_action_deny(waf, ctx, '2', [==[null]==])
                 return
             end
-        
+
         -----------------------------------
         ----------------header-------------
         -----------------------------------
@@ -131,11 +131,11 @@ function _M.run(waf, ctx)
                 waf_action_deny(waf, ctx, '80', [==[null]==])
                 return
             end
-        
+
         -----------------------------------
         ----------------cookie-------------
         -----------------------------------
-        
+
         -----------------------------------
         ----------------args---------------
         -----------------------------------
@@ -324,7 +324,7 @@ function _M.run(waf, ctx)
                 waf_action_deny(waf, ctx, '79', [==[null]==])
                 return
             end
-        
+
     elseif phase == "header_filter" then
 
     elseif phase == "body_filter" then

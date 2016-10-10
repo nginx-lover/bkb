@@ -36,6 +36,22 @@ _M.whitelistip = iputils.parse_cidrs(config_whitelistip)
 
 
 function _M.run()
+    -- run or disable
+    local run = wafrule:get("run")
+
+    if run == false then
+        return
+    end
+
+    -- dry run mode or not
+    local dry = wafrule:get("dry")
+
+    if dry == true then
+        _M.dry = true
+    else
+        _M.dry = false
+    end
+
     local phase = get_phase()
     local begin = gettimeofday()
     local ctx = ngx.ctx

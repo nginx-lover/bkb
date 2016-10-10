@@ -3,7 +3,7 @@
 # @Author: detailyang
 # @Date:   2016-09-20 15:09:14
 # @Last Modified by:   detailyang
-# @Last Modified time: 2016-09-20 15:36:11
+# @Last Modified time: 2016-10-10 14:51:55
 
 while (( "$#" )); do
     case "$1" in
@@ -25,9 +25,9 @@ while (( "$#" )); do
             ;;
         --help)
 cat <<EOS
-usage: --hostname localhost --type ip|rule
-    --hostname nginx hostname
-    --type ip|rule
+usage: -h localhost -t ip|rule
+    --hostname|-h nginx hostname
+    --type|-t ip|rule
     --help   see help
 EOS
         exit 1
