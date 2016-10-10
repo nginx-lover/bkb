@@ -69,7 +69,7 @@ function _M.run()
             if code == nil then
                 ngx_log(ERR, "[WAF] get ip nil")
             else
-                local rip, err = loadstring(code)
+                local rip, err = loadstring(code, '=ip.lua')
                 if rip == nil then
                     ngx_log(ERR, "[WAF] loadstring get err" .. err)
                     return ngx.exit(500)
@@ -90,7 +90,7 @@ function _M.run()
             if code == nil then
                 ngx_log(ERR, "[WAF] get rule nil")
             else
-                local rcode, err = loadstring(code)
+                local rcode, err = loadstring(code, '=rule.lua')
                 if rcode == nil then
                     ngx_log(ERR, "[WAF] loadstring get err" .. err)
                     return ngx.exit(500)
