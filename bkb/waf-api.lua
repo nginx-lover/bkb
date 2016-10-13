@@ -1,7 +1,7 @@
 -- @Author: detailyang
 -- @Date:   2016-10-10 14:07:32
 -- @Last Modified by:   detailyang
--- @Last Modified time: 2016-10-13 17:22:22
+-- @Last Modified time: 2016-10-13 19:46:54
 local _M = {}
 
 local ngx_re_match = ngx.re.match
@@ -89,6 +89,10 @@ local function do_waf_get()
     local run = wafrule:get("run")
     local ip_version = wafrule:get("ip.version")
     local rule_version = wafrule:get("rule.version")
+    local totaldelay = wafrule:get("totaldelay") or 0
+    local maxdelay = wafrule:get("maxdelay") or 0
+    local totalcnt = wafrule:get("totalcnt") or 1
+    local trigger = wafrule:get("trigger") or 0
 
     local rv = {
         waf_mode_file = waf_mode_file,
@@ -99,7 +103,12 @@ local function do_waf_get()
         },
         rule = {
             version = ip_version,
-        }
+        },
+        totaldelay = totaldelay,
+        totalcnt = totalcnt,
+        delay = totaldelay / totalcnt,
+        trigger = trigger,
+        maxdelay = maxdelay,
     }
 
     return ngx.say(cjson_encode(rv))

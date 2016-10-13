@@ -122,7 +122,6 @@ function _M.run()
 
     local delay = gettimeofday() - begin
     ctx.delay = delay
-    ngx.req.set_header(_M.appname, delay)
 end
 
 return _M

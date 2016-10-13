@@ -392,4 +392,16 @@ function _M.get_post_args()
 end
 
 
+-- This is patch for old lua_nginx_module
+function _M.dict_add(dict, key, value, init)
+   local newval, err = dict:incr(key, value)
+   if not newval and err == "not found" then
+       dict:add(key, init)
+       return dict:incr(key, value)
+   end
+
+   return newval, err
+end
+
+
 return _M
