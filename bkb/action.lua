@@ -55,6 +55,9 @@ function _M.deny(waf, ctx, id, param)
     end
 
     html = ngx_re_sub(html, '<!--id-->', id)
+    if html == nil then
+        html = "<h1>You Have Been Block</h1>"
+    end
 
     say(html)
 

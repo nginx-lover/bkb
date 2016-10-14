@@ -27,19 +27,30 @@ function _M.cmdLine(waf, value)
 end
 
 
-function _M.normalise_path(waf, value)
+function _M.normalise_path(waf, _value)
+    local value = _value
     while (match(value, [=[[^/][^/]*/\.\./|/\./|/{2,}]=], waf.pcre.options)) do
         value = gsub(value, [=[[^/][^/]*/\.\./|/\./|/{2,}]=], '/', waf.pcre.options)
+        if value == nil then
+            return _value
+        end
     end
 
     return value
 end
 
 
-function _M.normalisePathWin(waf, value)
+function _M.normalisePathWin(waf, _value)
+    local value = _value
     value = value:gsub('\\', '/')
+    if value == nil then
+        return _value
+    end
     while (match(value, [=[[^/][^/]*/\.\./|/\./|/{2,}]=], waf.pcre.options)) do
         value = gsub(value, [=[[^/][^/]*/\.\./|/\./|/{2,}]=], '/', waf.pcre.options)
+        if value == nil then
+            return _value
+        end
     end
 
     return value
@@ -59,6 +70,10 @@ end
 function _M.htmlEntityDecode(waf, value)
     local str = gsub(value, [=[&lt;]=], '<', waf.pcre.options)
 
+    if str == nil then
+        return value
+    end
+
     str = gsub(str, [=[&gt;]=], '>', waf.pcre.options)
     str = gsub(str, [=[&quot;]=], '"', waf.pcre.options)
     str = gsub(str, [=[&apos;]=], "'", waf.pcre.options)
@@ -71,8 +86,13 @@ function _M.htmlEntityDecode(waf, value)
 end
 
 
-function _M.compressWhitespace(waf, value)
-    return gsub(value, [=[\s+]=], ' ', waf.pcre.options)
+function _M.compressWhitespace(waf, _value)
+    local value = gsub(_value, [=[\s+]=], ' ', waf.pcre.options)
+    if value == nil then
+        return _value
+    else
+        return value
+    end
 end
 
 
@@ -101,13 +121,23 @@ function _M.removeNulls(waf, value)
 end
 
 
-function _M.removeWhitespace(waf, value)
-    return gsub(value, [=[\s+]=], '', waf.pcre.options)
+function _M.removeWhitespace(waf, _value)
+    local value = gsub(_value, [=[\s+]=], '', waf.pcre.options)
+    if value == nil then
+        return _value
+    else
+        return value
+    end
 end
 
 
-function _M.replaceComments(waf, value)
-    return gsub(value, [=[\/\*(\*(?!\/)|[^\*])*\*\/]=], '', waf.pcre.options)
+function _M.replaceComments(waf, _value)
+    local value = gsub(_value, [=[\/\*(\*(?!\/)|[^\*])*\*\/]=], '', waf.pcre.options)
+    if value == nil then
+        return _value
+    else
+        return value
+    end
 end
 
 
