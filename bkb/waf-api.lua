@@ -1,7 +1,7 @@
 -- @Author: detailyang
 -- @Date:   2016-10-10 14:07:32
 -- @Last Modified by:   detailyang
--- @Last Modified time: 2016-10-13 19:46:54
+-- @Last Modified time: 2016-10-17 11:29:36
 local _M = {}
 
 local ngx_re_match = ngx.re.match
@@ -10,10 +10,11 @@ local cjson = require("cjson.safe")
 local cjson_encode = cjson.encode
 local cjson_decode = cjson.decode
 local getenv = os.getenv
-local wafdir = getenv('WAF-DIR')
+local wafdir = getenv("WAF-DIR")
 local loadstring = loadstring
 local wafrule = ngx.shared.wafrule
 local waf_mode_file = nil
+local floor = require("math").floor
 
 
 local function do_rule()
@@ -87,26 +88,30 @@ end
 local function do_waf_get()
     local dry = wafrule:get("dry")
     local run = wafrule:get("run")
-    local ip_version = wafrule:get("ip.version")
-    local rule_version = wafrule:get("rule.version")
+    local ip_version = wafrule:get("ip.version") or 0
+    local rule_version = wafrule:get("rule.version") or 0
     local totaldelay = wafrule:get("totaldelay") or 0
     local maxdelay = wafrule:get("maxdelay") or 0
     local totalcnt = wafrule:get("totalcnt") or 1
     local trigger = wafrule:get("trigger") or 0
 
+    if ip_version == 0 then
+        ip_version = require("bkb.ip")._VERSION
+    end
+
+    if rule_version == 0 then
+        rule_version = require("bkb.rule")._VERSION
+    end
+
     local rv = {
         waf_mode_file = waf_mode_file,
         run = run,
         dry = dry,
-        ip = {
-            version = ip_version,
-        },
-        rule = {
-            version = ip_version,
-        },
+        ip_version = ip_version,
+        rule_version = rule_version,
         totaldelay = totaldelay,
         totalcnt = totalcnt,
-        delay = totaldelay / totalcnt,
+        delay = floor(totaldelay / totalcnt),
         trigger = trigger,
         maxdelay = maxdelay,
     }
