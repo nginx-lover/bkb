@@ -24,7 +24,7 @@ you more time to patch and test updates
 
 
 #Todo
-* DDos Protect
+* CC Protect
 
 
 #Principle
