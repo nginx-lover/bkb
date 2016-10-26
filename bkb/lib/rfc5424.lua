@@ -71,7 +71,7 @@ local Severity = {
 
 local string_format = string.format
 local rfc5424_timestamp_format = "%b %d %H:%M:%S"
-local rfc5424_format = "<%d>%s %s %s[%d]: %s"
+local rfc5424_format = "<%d>%s %s %s[%d]: %s\n" --\n it's needable for tcp
 
 function _M.encode(facility, severity, hostname, pid, appname, msg)
     local pri = (Facility[facility] * 8 + Severity[severity])
