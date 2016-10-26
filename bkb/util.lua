@@ -6,11 +6,14 @@ local resty_cookie = require("bkb.lib.resty.cookie")
 local xml = require("bkb.lib.xml")
 local xml_parse = xml.parse
 local string_sub = string.sub
+local string_find = string.find
 local string_lower = string.lower
 local cjson = require "cjson"
 local json = require("cjson.safe")
 local json_decode = json.decode
 local cjson_decode = cjson.decode
+local table_remove = table.remove
+local table_insert = table.insert
 local upload = require("bkb.lib.resty.upload")
 
 
@@ -77,7 +80,7 @@ end
 
 
 function _M.get_first_line(str)
-    local index = string.find(str, "\r\n")
+    local index = string_find(str, "\r\n")
     if index ~= nil then
         return string_sub(str, 0, index - 1)
     else
@@ -172,7 +175,7 @@ function _M.merge_tables(...)
                 t[k] = v
             end
         elseif type(arg) == 'string' then
-            table.insert(t, arg)
+            table_insert(t, arg)
         elseif type(arg) == 'number' then
             return arg
         end
@@ -201,7 +204,7 @@ function _M.split(str, pat)
 
     while s do
         if s ~= 1 or cap ~= "" then
-            table.insert(t,cap)
+            table_insert(t,cap)
         end
         last_end = e+1
         s, e, cap = str:find(fpat, last_end)
@@ -209,7 +212,7 @@ function _M.split(str, pat)
 
     if last_end <= #str then
         cap = str:sub(last_end)
-        table.insert(t, cap)
+        table_insert(t, cap)
     end
 
     return t
@@ -271,6 +274,11 @@ function _M.get_post_args()
     ngx.req.read_body()
     if content_type ~= nil and string_sub(content_type, 1, 20) == "multipart/form-data;" then
         local data = ngx.req.get_body_data() -- ngx.req.get_post_args()
+
+        --[[
+            It's recommended to make client_body_buffer_size == client_max_body_size
+            We Dont Want To Use IO Operation
+        --]]
         if not data then
             local datafile = ngx.req.get_body_file()
             if datafile then
@@ -287,18 +295,18 @@ function _M.get_post_args()
             return {}
         end
 
-        local boundary = "--" .. string.sub(content_type ,31)
+        local boundary = "--" .. string_sub(content_type ,31)
         local bt = _M.split(data, boundary)
-        local last = table.remove(bt)
+        local last = table_remove(bt)
 
         local args = {}
         local filename = {}
         for k, v in ipairs(bt) do
-            local sp, ep, namecap, filenamecap = string.find(v,'Content%-Disposition: form%-data; name="(.+)"; filename="(.*)"')
+            local sp, ep, namecap, filenamecap = string_find(v,'Content%-Disposition: form%-data; name="(.+)"; filename="(.*)"')
             if not sp then
                 local t = _M.split(v, "\r\n\r\n")
                 if (#t == 2) then
-                    local name = string.sub(t[1], #"\r\nContent-Disposition: form-data; name=\"" + 1, -2)
+                    local name = string_sub(t[1], #"\r\nContent-Disposition: form-data; name=\"" + 1, -2)
                     if #name == 0 then
                         return args
                     end
