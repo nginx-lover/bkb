@@ -67,7 +67,7 @@ function _M.run()
             body = ngx.ctx.body,
         }
         local jmsg = cjson_encode(msg)
-        local rfc5424_msg = rfc5424_encode('LOCAL6', 'INFO', hostname, pid, appname, jmsg)
+        local rfc5424_msg = rfc5424_encode(config_rsyslog.facility, config_rsyslog.severity, hostname, pid, appname, jmsg)
         local _, err = logger_log(rfc5424_msg)
         if err then
             ngx_log(ERR, "failed to log message: ", err)
