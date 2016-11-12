@@ -69,13 +69,14 @@ local Severity = {
     ["DEBUG"] = LOG_DEBUG,
 }
 
+local ngx_time = ngx.time
 local string_format = string.format
 local rfc5424_timestamp_format = "%b %d %H:%M:%S"
 local rfc5424_format = "<%d>%s %s %s[%d]: %s\n" --\n it's needable for tcp
 
 function _M.encode(facility, severity, hostname, pid, appname, msg)
     local pri = (Facility[facility] * 8 + Severity[severity])
-    local t = os.date(rfc5424_timestamp_format)
+    local t = os.date(rfc5424_timestamp_format, ngx_time())
 
     return string_format(rfc5424_format, pri, t, hostname, appname, pid, msg)
 end
