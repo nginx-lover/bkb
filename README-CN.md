@@ -33,8 +33,8 @@ BKB 在 [dota] 里代表黑皇杖，在这里我们用来指明 Web 防火墙。
 
 # Other
 
-[BKB-API]: BKB API文档
-[BKB-TSAR]: BKB tsar 插件
+[BKB-API]: BKB API文档     
+[BKB-TSAR]: BKB tsar 插件    
 
 # Principle
 
