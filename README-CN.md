@@ -83,16 +83,16 @@ end
 
 
 ##phase
-*字段含义*: 指明规则工作阶段
-*字段类型*: 枚举字符串类型(access、header_filter、body_filter), 特别得为了跟 nginx 的 PHASE 相对应
+*字段含义*: 指明规则工作阶段    
+*字段类型*: 枚举字符串类型(access、header_filter、body_filter), 特别得为了跟 nginx 的 PHASE 相对应    
 
 原始的 [modsecurity] 工作阶段如下:
 ![phase](https://github.com/x-v8/bkb/blob/master/docs/modsecurity.jpeg)
 
 
 ##scope
-*字段含义*: 规则作用域，指明规则修改的变量
-*字段类型*: 枚举字符串类型 ('ip', 'uri', 'header', 'cookie', 'arg')
+*字段含义*: 规则作用域，指明规则修改的变量    
+*字段类型*: 枚举字符串类型 ('ip', 'uri', 'header', 'cookie', 'arg')    
 
 ```python
 SCOPECHOICE = (
@@ -106,11 +106,11 @@ SCOPECHOICE = (
 
 
 ##tag
-*字段含义*: 规则的标签
-*字段类型*: 枚举字符串类型 ('XSS', 'SQLI', 'IP Deny', 'Shell Inject', 'URI Scan', 'PHPI', 'SCANNER', 'CVE')
+*字段含义*: 规则的标签    
+*字段类型*: 枚举字符串类型 ('XSS', 'SQLI', 'IP Deny', 'Shell Inject', 'URI Scan', 'PHPI', 'SCANNER', 'CVE')    
 
 
-````python
+```python
 TAGCHOICE = (
     (0, 'XSS'),
     (1, 'SQLI'),
@@ -121,11 +121,11 @@ TAGCHOICE = (
     (6, 'SCANNER'),
     (7, 'CVE')
 )
-````
+```
 
 ##operator
-*字段含义*: 规则的 operator 函数
-*字段类型*: 枚举字符串类型 ( 'eq', 'rx', 'ipMatch', 'beginsWith', 'endsWith', 'ge', 'gt', 'lt', 'le', 'empty', 'nonEmpty', 'within', 'pmFromFile', 'pm')
+*字段含义*: 规则的 operator 函数    
+*字段类型*: 枚举字符串类型 ( 'eq', 'rx', 'ipMatch', 'beginsWith', 'endsWith', 'ge', 'gt', 'lt', 'le', 'empty', 'nonEmpty', 'within', 'pmFromFile', 'pm')    
 
 ```python
 OPERATOR = [
@@ -135,8 +135,8 @@ OPERATOR = [
 ```
 
 ##transform
-*字段含义*: 规则的 transform 函数
-*字段类型*: 枚举字符串类型 ('urlDecodeUni', 'jsDecode', 'lowercase', 'base64Decode', 'base64Encode', 'length', 'sha1', 'htmlEntityDecode', 'compressWhitespace', 'removeWhitespace', 'cssDecode')
+*字段含义*: 规则的 transform 函数    
+*字段类型*: 枚举字符串类型 ('urlDecodeUni', 'jsDecode', 'lowercase', 'base64Decode', 'base64Encode', 'length', 'sha1', 'htmlEntityDecode', 'compressWhitespace', 'removeWhitespace', 'cssDecode')    
 
 ```python
 TRANSFORM = [
@@ -147,35 +147,34 @@ TRANSFORM = [
 ```
 
 ##variable
-*desc*: the rule's variable
-*字段含义*: 规则要使用的变量
-*字段类型*: 枚举的字符串类型 ('ip', 'uri', 'request_headers', 'request_cookies', 'args', 'matched_var')
+*字段含义*: 规则要使用的变量    
+*字段类型*: 枚举的字符串类型 ('ip', 'uri', 'request_headers', 'request_cookies', 'args', 'matched_var')    
 
-````python
+```python
 VARIABLE = [
     'ip', 'uri', 'request_headers', 'request_cookies', 'args', 'matched_var'
 ]
-````
+```
 
 ##pattern.type
-*字段含义*: 规则要匹配的模式类型
-*字段类型*: 目前只支持 string
+*字段含义*: 规则要匹配的模式类型    
+*字段类型*: 目前只支持 string    
 
 ##pattern.value
-*字段含义*: 规则要匹配的模式值
-*字段类型*: 字符串类型
+*字段含义*: 规则要匹配的模式值    
+*字段类型*: 字符串类型    
 
 
 ##action
-*字段含义*: 规则匹配到要执行的动作
-*字段类型*: 枚举的字符串类型 ('deny', 'skip', 'log')
+*字段含义*: 规则匹配到要执行的动作    
+*字段类型*: 枚举的字符串类型 ('deny', 'skip', 'log')    
 
-````python
+```python
 ACTION = [
     'deny', 'skip', 'log'
 ]
-````
+```
 
 ##chain
-*字段含义*: 规则链
-*字段类型*: 数组类型（数组里的值指向规则)
+*字段含义*: 规则链    
+*字段类型*: 数组类型（数组里的值指向规则)    
