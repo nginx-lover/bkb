@@ -2,6 +2,8 @@
 [openresty]: https://github.com/openresty
 [json]: http://www.json.org
 [dota]: http://blog.dota2.com/
+[BKB-API]: https://github.com/x-v8/bkb/blob/master/docs/API-CN.md
+[BKB-TSAR]: https://github.com/detailyang/tsar-bkb.git
 
 # bkb
 
