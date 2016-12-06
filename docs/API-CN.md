@@ -67,6 +67,8 @@ PUT /ip
 
 
 PUT /rule
+=========
+
 `curl -H "Host: bkb" -X PUT "http://127.0.0.1:80/rule`
 
 热更新 RULE集
