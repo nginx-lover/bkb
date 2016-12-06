@@ -14,20 +14,27 @@ BKB in here is the web application firewall (WAF), it's based on the [OpenResty]
 It 's used to prevent malignant web attack from HTTP(s). And it's insired by the [modsecurity] and can be compatibled with the modsecurity rules.
 
 
-#Feature
+# Feature
+
 * Automation Detection - Detecting bots, crawlers, scanners and other surface malicious activity by modsecurity
 * Common Web Attacks Protection - XSS、SQL Inject、Shell Inject by modsecurity
 * Feature-specific deny - URL-specific 、Header-Specific、Args-Specific and so on
 * Virtual patching - Fixes a vulnerability before you patch your server or update your code, allowing
 you more time to patch and test updates
-* IP Deny - blacklist/whitelist traffic from specific IP addresses with time expire 
+* IP Deny - blacklist/whitelist traffic from specific IP addresses with time expire
 
 
-#Todo
+# Todo
+
 * CC Protect
 
+# Other
 
-#Principle
+[BKB-API]:
+[BKB-TSAR]:
+
+# Principle
+
 According the cloudflare blog post in 2013 [cloudflares-new-waf-compiling-to-lua](https://blog.cloudflare.com/cloudflares-new-waf-compiling-to-lua/), I implement the first version which it's not so good. I carefully think that the [modsecurity] rules compiling to the lua code chunk is not perfect and the compiler which i implement is dirty:(. So i reading the [modsecurity] rules carefully, then design the second version.
 
 From the [modsecurity] rules, it can be demonstrated as the following:
@@ -75,13 +82,13 @@ So I design the universal rule [json] format which can be manipulated by almost 
   }
 ````
 
-#Rule
+# Rule
 
-##id
+## id
 *desc*: rule'id
 
 
-##phase
+## phase
 *desc*: rule 's work phase
 
 It can be consist of access、header_filter、body_filter and It's fit for nginx http phase specially.
@@ -90,7 +97,7 @@ the origin modsecurity rule's phase is the following:
 ![phase](https://github.com/x-v8/bkb/blob/master/docs/modsecurity.jpeg)
 
 
-##scope
+## scope
 *desc*: rule's scope
 
 It indicate that the scope the rule's variable.
@@ -106,7 +113,7 @@ SCOPECHOICE = (
 ````
 
 
-##tag
+## tag
 *desc*: rule 's tag
 
 It can be consist of the following:
@@ -124,7 +131,7 @@ TAGCHOICE = (
 )
 ````
 
-##operator
+## operator
 *desc*: the rule's operator
 
 commonly it will be the some string function to match variable. It can be consist of the following:
@@ -135,7 +142,7 @@ OPERATOR = [
 ]
 ````
 
-##transform
+## transform
 *desc*: the rule's transform
 
 It can be consist of the following:
@@ -147,7 +154,7 @@ TRANSFORM = [
 ]
 ````
 
-##variable
+## variable
 *desc*: the rule's variable
 
 It can be consist of the following:
@@ -157,13 +164,13 @@ VARIABLE = [
 ]
 ````
 
-##pattern
+## pattern
 *desc*: the rule's pattern
 
 It always be the string you want to match like abcd
 
 
-##action
+## action
 *desc*: rule's action
 
 It can be consist of the following:
@@ -173,7 +180,7 @@ ACTION = [
 ]
 ````
 
-##chain
+## chain
 *desc*: rule's chain
 
 It's the pre condition for rule.
